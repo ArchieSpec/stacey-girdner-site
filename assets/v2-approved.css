@@ -1,0 +1,249 @@
+/*
+ * Stacey Girdner V2 approved overlay
+ * Design contract: preserve Version 11.5 composition, imagery scale, serif hierarchy,
+ * warm paper palette, and editorial pacing. Only source-approved V2 corrections and
+ * restrained readability/accessibility refinements belong in this file.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
+:root {
+  --v2-focus: #7f3f35;
+}
+
+/* Stacey remains the primary brand signal; the credential reads as a clear second line. */
+.brand-name {
+  font-size: 22px;
+}
+
+.brand-sub {
+  margin-top: 5px;
+  font-size: 8.8px;
+  letter-spacing: 0.1em;
+}
+
+.desktop-nav a,
+.header-cta {
+  font-size: 9.9px;
+}
+
+/*
+ * Version 11.5 inserted hard line breaks inside every page title. Preserve every
+ * word, but let each viewport form readable phrases instead of orphaning words.
+ */
+main h1 {
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  line-height: 1.08;
+}
+
+.home-copy h1 {
+  font-size: clamp(36px, 3.85vw, 56px);
+  text-wrap: wrap;
+}
+
+.home-copy h1 span {
+  display: block;
+  text-wrap: balance;
+}
+
+/* V2 applies the requested ~20% increase to small page/category labels only. */
+.editorial-copy > .eyebrow,
+.home-copy > .eyebrow,
+.pathway-section > .eyebrow,
+.v2-approach-section > .eyebrow {
+  margin-bottom: 14px;
+  font-size: 10.8px;
+  line-height: 1.35;
+  letter-spacing: 0.15em;
+}
+
+/* Keep the calm Version 11.5 display scale; improve only compact supporting copy. */
+.point strong,
+.faq-list summary {
+  font-size: 12px;
+}
+
+.point p,
+.faq-list details p {
+  font-size: 12px;
+  line-height: 1.58;
+}
+
+.mini-card-row p {
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.faq-list summary {
+  min-height: 44px;
+}
+
+/* Content → space → action, with dependable client-friendly touch targets. */
+.btn,
+.header-cta,
+.mobile-cta {
+  min-height: 44px;
+}
+
+.btn {
+  padding: 11px 17px;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.btn-row .btn,
+.spacious-cta .btn {
+  margin-top: 0;
+}
+
+.spacious-cta {
+  margin-top: 38px;
+}
+
+.home-cta {
+  margin-top: 32px;
+}
+
+/* Make keyboard use visible without changing the established visual language. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--v2-focus) 72%, white);
+  outline-offset: 3px;
+}
+
+/* The About quote is editorial text below the portrait, never an image overlay/card. */
+.editorial-page .editorial-media > .v2-about-quote {
+  position: static;
+  inset: auto;
+  width: auto;
+  max-width: 520px;
+  margin: 22px auto 0;
+  padding: 0 12px;
+  transform: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.v2-about-quote p {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Caveat', cursive;
+  font-size: clamp(23px, 2.15vw, 31px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+/* Fold the approved 11.5 Approach content into About without introducing a new card system. */
+.v2-approach-section {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(36px, 6vw, 88px);
+  width: min(1240px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 68px 0 82px;
+  border-top: 1px solid var(--line);
+}
+
+.v2-approach-section h2 {
+  max-width: 650px;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 0.98;
+}
+
+.v2-approach-copy {
+  max-width: 640px;
+}
+
+.v2-approach-copy > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.v2-approach-copy .callout {
+  margin-top: 26px;
+}
+
+/* Preserve Stacey-selected focal subjects inside the existing rounded image frames. */
+img[src$='individual-tree.jpg'] {
+  object-position: center 48%;
+}
+
+img[src$='faq-approved-staircase.jpg'] {
+  object-position: 76% center;
+}
+
+img[src$='consultation-orange-stairwell.jpg'] {
+  object-position: center 48%;
+}
+
+@media (max-width: 980px) {
+  .desktop-nav a {
+    letter-spacing: 0.035em;
+  }
+}
+
+@media (max-width: 720px) {
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand-sub {
+    font-size: 8.8px;
+  }
+
+  main h1 {
+    font-size: clamp(39px, 11vw, 50px);
+    line-height: 1.08;
+  }
+
+  .btn {
+    min-height: 46px;
+    padding: 12px 15px;
+  }
+
+  .home-cta {
+    gap: 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+
+  .v2-about-quote p {
+    font-size: 24px;
+    line-height: 1.24;
+  }
+
+  .v2-approach-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: calc(100% - 40px);
+    padding: 50px 0 66px;
+  }
+
+  .v2-approach-section h2 {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  img[src$='faq-approved-staircase.jpg'] {
+    object-position: 78% center;
+  }
+}
+
+@media (max-width: 390px) {
+  .home-cta .btn {
+    font-size: 9.5px;
+  }
+}

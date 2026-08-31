@@ -1,0 +1,162 @@
+{
+  "passed": 26,
+  "failed": 0,
+  "results": [
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Home",
+      "path": "/stacey-girdner-site/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:About",
+      "path": "/stacey-girdner-site/about/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Individual",
+      "path": "/stacey-girdner-site/individual/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Couples",
+      "path": "/stacey-girdner-site/couples/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Professional",
+      "path": "/stacey-girdner-site/executives/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Transitions",
+      "path": "/stacey-girdner-site/life-transitions/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:FAQ",
+      "path": "/stacey-girdner-site/faq/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Contact",
+      "path": "/stacey-girdner-site/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "nav:Consultation",
+      "path": "/stacey-girdner-site/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "home:Schedule a Consultation",
+      "path": "/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "faq:first disclosure",
+      "path": "/faq/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "footer:Fees, policies + parking",
+      "path": "/policies/",
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390",
+      "interaction": "contact:form present, not submitted",
+      "path": "/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Home",
+      "path": "/stacey-girdner-site/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:About",
+      "path": "/stacey-girdner-site/about/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Individual",
+      "path": "/stacey-girdner-site/individual/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Couples",
+      "path": "/stacey-girdner-site/couples/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Professional",
+      "path": "/stacey-girdner-site/executives/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Transitions",
+      "path": "/stacey-girdner-site/life-transitions/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:FAQ",
+      "path": "/stacey-girdner-site/faq/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Contact",
+      "path": "/stacey-girdner-site/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "nav:Consultation",
+      "path": "/stacey-girdner-site/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "home:Schedule a Consultation",
+      "path": "/contact/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "faq:first disclosure",
+      "path": "/faq/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "footer:Fees, policies + parking",
+      "path": "/policies/",
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440",
+      "interaction": "contact:form present, not submitted",
+      "path": "/contact/",
+      "pass": true
+    }
+  ]
+}
