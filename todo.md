@@ -23,3 +23,42 @@
 - [x] Verify no serif glyph collisions remain in any two-line or three-line page title.
 - [x] Re-run route, menu, CTA, FAQ, Policies, and contact-form structure QA after the typography fix.
 - [x] Capture representative corrected pages for user approval before publication.
+## GitHub publication
+
+- [x] Confirm the reviewed local revision is `038375a`; publish that exact committed revision without including later checklist-only edits.
+- [x] Inspect GitHub authentication and remote production-branch state without changing the remote.
+- [x] Restore authenticated write access without requesting or exposing a password.
+- [x] Do not use the sandbox GitHub/Google sign-in flow; it is not accessible to the user.
+- [x] Use a repository-scoped write credential approved through GitHub.
+- [x] Confirm the remote production branch divergence and preserve the prior state as a rollback branch.
+- [x] Publish reviewed revision `038375a` to the production branch after authentication, divergence review, and user confirmation.
+- [x] Wait for GitHub Pages to deploy the new production revision successfully.
+- [x] Verify the permanent public Home, About, Individual, Couples, Professional, Transitions, FAQ, Policies, and Contact routes on desktop and mobile.
+- [x] Confirm the permanent site displays the final approved images, headline wraps, CTA labels, and Contact line spacing.
+- [x] Provide the permanent public URL only after deployment and route verification succeed.
+
+## Ways to Begin navigation update
+
+- [x] Replace the three existing Therapy, Approach, and Specialties cards with four cards.
+- [x] Use the exact navigation-matched labels and order: `01 Individual`, `02 Couples`, `03 Professional`, `04 Transitions`.
+- [x] Link Individual to `/individual/`, Couples to `/couples/`, Professional to `/executives/`, and Transitions to `/life-transitions/` under the Stacey base path.
+- [x] Preserve the approved Ways to Begin section position, typography, borders, colors, and visual hierarchy.
+- [x] Confirm four equal columns on desktop, two columns at tablet width, and one clear column on mobile.
+- [x] Confirm each card works through a real click and opens the correct existing page.
+- [x] Publish this correction independently of the deferred form-relay work.
+
+## Footer emphasis update
+
+- [x] Increase the highlighted right-side footer group’s size, weight, and contrast without changing its position.
+- [x] Give `Fees, policies + parking` a clearly recognizable link treatment and preserve its existing Policies destination.
+- [x] Keep `Dr. Stacey Girdner` legible but visually secondary to the practical-information link.
+- [x] Confirm the emphasized footer remains balanced on desktop, tablet, and mobile.
+- [x] Apply the same footer treatment consistently across every route through the shared overlay stylesheet.
+
+## FAQ reassurance update
+
+- [x] Remove the standalone note `You do not need to know exactly what to say before you call.` from below the FAQ list.
+- [x] Replace the first FAQ answer with three shorter sentences for easier reading.
+- [x] End the first FAQ answer with `You do not need to know exactly what to say before you call.`
+- [x] Preserve the existing first question, accordion styling, approved child-staircase image, and all other provisional FAQ content.
+- [x] Confirm the revised first answer expands and reads clearly on desktop and mobile.

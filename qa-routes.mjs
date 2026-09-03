@@ -180,13 +180,37 @@ async function runViewport(name, width, height, port) {
     await assertPage(client, '/contact/', `${name} Home CTA`);
     results.push({ viewport: name, interaction: 'home:Schedule a Consultation', path: '/contact/', pass: true });
 
+    const pathways = [
+      ['Individual', '/individual/'],
+      ['Couples', '/couples/'],
+      ['Professional', '/executives/'],
+      ['Transitions', '/life-transitions/'],
+    ];
+    for (const [label, path] of pathways) {
+      await navigate(client, `${BASE_URL}/`);
+      await clickByText(client, '.pathway-card h3', label);
+      await waitForPage(
+        client,
+        `window.location.pathname.includes('${path.replace(/\/$/, '')}') && document.querySelector('[data-v2-applied="true"]')`,
+        `Ways to Begin ${label}`,
+      );
+      await assertPage(client, path, `${name} Ways to Begin ${label}`);
+      results.push({ viewport: name, interaction: `pathway:${label}`, path, pass: true });
+    }
+
     await navigate(client, `${BASE_URL}/faq/`);
     const faq = await client.evaluate(`(() => {
       const detail = document.querySelector('.faq-list details');
       detail?.querySelector('summary')?.click();
       return { open: detail?.open === true, text: detail?.querySelector('p')?.innerText || '' };
     })()`);
-    if (!faq.open || faq.text.length < 20) throw new Error(`${name} FAQ disclosure did not open`);
+    if (
+      !faq.open ||
+      !faq.text.endsWith('You do not need to know exactly what to say before you call.') ||
+      await client.evaluate(`Boolean(document.querySelector('.faq-reflection'))`)
+    ) {
+      throw new Error(`${name} FAQ reassurance update failed`);
+    }
     results.push({ viewport: name, interaction: 'faq:first disclosure', path: '/faq/', pass: true });
 
     await navigate(client, `${BASE_URL}/`);

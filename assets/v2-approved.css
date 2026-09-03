@@ -106,6 +106,37 @@ main h1 {
   margin-top: 32px;
 }
 
+/* Match the final navigation categories in the existing Ways to Begin section. */
+.pathway-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pathway-card h3 {
+  font-weight: 600;
+}
+
+/* Make practical footer navigation easy to recognize without moving the footer. */
+.footer-links a {
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--v2-focus) 58%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.footer-links span {
+  color: var(--ink-soft);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: var(--v2-focus);
+}
+
 /* Make keyboard use visible without changing the established visual language. */
 a:focus-visible,
 button:focus-visible,
@@ -190,6 +221,10 @@ img[src$='consultation-orange-stairwell.jpg'] {
   .desktop-nav a {
     letter-spacing: 0.035em;
   }
+
+  .pathway-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
@@ -213,6 +248,18 @@ img[src$='consultation-orange-stairwell.jpg'] {
 
   .home-cta {
     gap: 10px;
+  }
+
+  .pathway-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+  }
+
+  .footer-links span {
+    font-size: 11px;
   }
 
   .contact-form input,

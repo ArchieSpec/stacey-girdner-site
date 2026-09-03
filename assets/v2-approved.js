@@ -128,6 +128,48 @@
       /explore how i work/i.test(link.textContent || '')
     );
     if (approachLink) approachLink.href = `${base}/about/#psychodynamic-approach`;
+
+    const pathwayGrid = document.querySelector('.pathway-section .pathway-grid');
+    if (pathwayGrid && pathwayGrid.dataset.v2Pathways !== 'true') {
+      const pathways = [
+        {
+          number: '01',
+          title: 'Individual',
+          description: 'A private place to understand what you feel, what you avoid, and the patterns shaping your choices.',
+          href: `${base}/individual/`,
+        },
+        {
+          number: '02',
+          title: 'Couples',
+          description: 'Understand the pattern between you, the histories each of you brings, and what becomes possible when both partners feel more seen.',
+          href: `${base}/couples/`,
+        },
+        {
+          number: '03',
+          title: 'Professional',
+          description: 'A confidential space to think more honestly about work, relationships, ambition, identity, and the cost of carrying so much.',
+          href: `${base}/executives/`,
+        },
+        {
+          number: '04',
+          title: 'Transitions',
+          description: 'Empty nest, retirement, caregiving, loss, relocation, and other transitions can unsettle a familiar sense of identity.',
+          href: `${base}/life-transitions/`,
+        },
+      ];
+
+      const cards = pathways.map(({ number, title, description, href }) => {
+        const card = document.createElement('a');
+        card.href = href;
+        card.className = 'pathway-card';
+        card.setAttribute('aria-label', `${title} therapy`);
+        card.innerHTML = `<span>${number}</span><h3>${title}</h3><p>${description}</p>`;
+        return card;
+      });
+
+      pathwayGrid.replaceChildren(...cards);
+      pathwayGrid.dataset.v2Pathways = 'true';
+    }
   };
 
   const updateAbout = () => {
@@ -202,6 +244,13 @@
       image.src = `${base}/images/faq-approved-staircase.jpg`;
       image.alt = 'A child standing at the base of a monumental staircase';
     }
+
+    const firstAnswer = document.querySelector('.faq-list details:first-child p');
+    if (firstAnswer) {
+      firstAnswer.textContent = 'The free consultation is a brief, 15-minute conversation. We will hear what is bringing you in, answer practical questions, and begin to see whether working together feels like a good fit. You do not need to know exactly what to say before you call.';
+    }
+
+    document.querySelector('.faq-reflection')?.remove();
   };
 
   const updatePolicies = () => {
