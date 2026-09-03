@@ -176,6 +176,12 @@
     const page = document.querySelector('.editorial-page');
     if (!page) return;
 
+    const portrait = page.querySelector('.editorial-media > img');
+    if (portrait) {
+      portrait.src = `${base}/images/stacey-portrait-clear.jpg`;
+      portrait.alt = 'Dr. Stacey Girdner';
+    }
+
     const quote = page.querySelector('.editorial-media .image-note');
     if (quote) {
       quote.classList.add('v2-about-quote');
@@ -185,26 +191,9 @@
     const approachButton = [...page.querySelectorAll('a')].find((link) =>
       /learn about my approach/i.test(link.textContent || '')
     );
-    if (approachButton) approachButton.href = '#psychodynamic-approach';
+    if (approachButton) approachButton.href = `${base}/approach/`;
 
-    if (!document.querySelector('#psychodynamic-approach')) {
-      const section = document.createElement('section');
-      section.id = 'psychodynamic-approach';
-      section.className = 'v2-approach-section';
-      section.innerHTML = `
-        <div>
-          <span class="eyebrow">Psychodynamic approach</span>
-          <h2>Why do I keep doing this, even when I know better?</h2>
-        </div>
-        <div class="v2-approach-copy">
-          <p>Psychodynamic therapy looks beneath the immediate problem. Together, we become curious about the experiences, relationships, and adaptations that shaped how you learned to move through the world.</p>
-          <div class="callout">
-            <strong>The goal is not to blame the past.</strong>
-            <p>It is to understand what still has a hold on the present, so you have more freedom in how you respond now.</p>
-          </div>
-        </div>`;
-      page.insertAdjacentElement('afterend', section);
-    }
+    document.querySelector('#psychodynamic-approach')?.remove();
   };
 
   const updateIndividual = () => {

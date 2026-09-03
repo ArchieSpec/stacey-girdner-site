@@ -180,6 +180,39 @@ async function runViewport(name, width, height, port) {
     await assertPage(client, '/contact/', `${name} Home CTA`);
     results.push({ viewport: name, interaction: 'home:Schedule a Consultation', path: '/contact/', pass: true });
 
+    await navigate(client, `${BASE_URL}/about/`);
+    const aboutState = await client.evaluate(`(() => {
+      const button = [...document.querySelectorAll('a')]
+        .find((link) => /learn about my approach/i.test(link.textContent || ''));
+      const portrait = document.querySelector('.editorial-media > img');
+      return {
+        buttonHref: button?.getAttribute('href') || '',
+        hasDuplicateSection: Boolean(document.querySelector('#psychodynamic-approach')),
+        portraitSrc: portrait?.getAttribute('src') || '',
+        portraitWidth: portrait?.naturalWidth || 0,
+        portraitHeight: portrait?.naturalHeight || 0,
+      };
+    })()`);
+    if (
+      !aboutState.buttonHref.endsWith('/approach/') ||
+      aboutState.hasDuplicateSection ||
+      !aboutState.portraitSrc.endsWith('/images/stacey-portrait-clear.jpg') ||
+      aboutState.portraitWidth < 1200 ||
+      aboutState.portraitHeight < 1600
+    ) {
+      throw new Error(`${name} About one-click flow or portrait clarity check failed: ${JSON.stringify(aboutState)}`);
+    }
+    results.push({ viewport: name, interaction: 'about:duplicate section removed and clear portrait loaded', path: '/about/', pass: true });
+
+    await clickByText(client, 'a', 'Learn about my approach');
+    await waitForPage(
+      client,
+      `window.location.pathname.includes('/approach') && document.querySelector('[data-v2-applied="true"]') && (document.querySelector('main')?.innerText || '').includes('Why do I keep doing this')`,
+      'About to Approach direct link',
+    );
+    await assertPage(client, '/approach/', `${name} About to Approach direct link`);
+    results.push({ viewport: name, interaction: 'about:Learn about my approach', path: '/approach/', pass: true });
+
     const pathways = [
       ['Individual', '/individual/'],
       ['Couples', '/couples/'],

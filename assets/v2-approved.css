@@ -51,8 +51,7 @@ main h1 {
 /* V2 applies the requested ~20% increase to small page/category labels only. */
 .editorial-copy > .eyebrow,
 .home-copy > .eyebrow,
-.pathway-section > .eyebrow,
-.v2-approach-section > .eyebrow {
+.pathway-section > .eyebrow {
   margin-bottom: 14px;
   font-size: 10.8px;
   line-height: 1.35;
@@ -172,38 +171,6 @@ textarea:focus-visible {
   letter-spacing: 0;
 }
 
-/* Fold the approved 11.5 Approach content into About without introducing a new card system. */
-.v2-approach-section {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(36px, 6vw, 88px);
-  width: min(1240px, calc(100% - 64px));
-  margin: 0 auto;
-  padding: 68px 0 82px;
-  border-top: 1px solid var(--line);
-}
-
-.v2-approach-section h2 {
-  max-width: 650px;
-  font-size: clamp(34px, 3.4vw, 46px);
-  line-height: 0.98;
-}
-
-.v2-approach-copy {
-  max-width: 640px;
-}
-
-.v2-approach-copy > p {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 14px;
-  line-height: 1.72;
-}
-
-.v2-approach-copy .callout {
-  margin-top: 26px;
-}
-
 /* Preserve Stacey-selected focal subjects inside the existing rounded image frames. */
 img[src$='individual-tree.jpg'] {
   object-position: center 48%;
@@ -270,18 +237,6 @@ img[src$='consultation-orange-stairwell.jpg'] {
   .v2-about-quote p {
     font-size: 24px;
     line-height: 1.24;
-  }
-
-  .v2-approach-section {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    width: calc(100% - 40px);
-    padding: 50px 0 66px;
-  }
-
-  .v2-approach-section h2 {
-    font-size: 36px;
-    line-height: 1;
   }
 
   img[src$='faq-approved-staircase.jpg'] {

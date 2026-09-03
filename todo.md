@@ -62,3 +62,23 @@
 - [x] End the first FAQ answer with `You do not need to know exactly what to say before you call.`
 - [x] Preserve the existing first question, accordion styling, approved child-staircase image, and all other provisional FAQ content.
 - [x] Confirm the revised first answer expands and reads clearly on desktop and mobile.
+
+## One-click About to Approach flow
+
+- [x] Identify the existing `Learn about my approach` control and the duplicated static Approach section appended to About.
+- [x] Remove only the duplicated static Approach section from About, including now-unused overlay styling.
+- [x] Change the existing control to navigate directly to `/stacey-girdner-site/approach/` in one click.
+- [x] Preserve the full dedicated Approach page, its approved content, imagery, typography, and layout.
+- [x] Confirm About ends cleanly without an empty gap after the duplicate section is removed.
+- [x] Confirm real-click navigation works on desktop and mobile and no second click is required.
+- [ ] Publish and verify the permanent About and Approach pages before client handoff.
+
+## About portrait clarity
+
+- [x] Measure the current portrait file’s native dimensions, compression, and desktop/mobile rendered size.
+- [x] Search preserved uploads, repository history, and public results for a higher-resolution version of the same approved portrait.
+- [x] Confirm no higher-resolution copy of the same approved portrait is available before restoration.
+- [x] Restore and upscale the approved portrait while preserving Stacey’s facial identity, expression, hair, clothing, background, and crop.
+- [x] Web-optimize the restored image to 1200×1600 and approximately 404 KB for clarity without unnecessary page weight.
+- [x] Confirm the portrait remains prominent, clear, and safely cropped on desktop and mobile.
+- [ ] Publish the portrait correction after the completed side-by-side fidelity review.
