@@ -211,7 +211,15 @@ async function runViewport(name, width, height, port) {
       'About to Approach direct link',
     );
     await assertPage(client, '/approach/', `${name} About to Approach direct link`);
+    const approachState = await client.evaluate(`(() => ({
+      hasImageNote: Boolean(document.querySelector('.editorial-media .image-note')),
+      mainText: (document.querySelector('main')?.innerText || '').trim(),
+    }))()`);
+    if (approachState.hasImageNote || !approachState.mainText.includes('Why do I keep doing this')) {
+      throw new Error(`${name} Approach image callout or page content check failed: ${JSON.stringify(approachState)}`);
+    }
     results.push({ viewport: name, interaction: 'about:Learn about my approach', path: '/approach/', pass: true });
+    results.push({ viewport: name, interaction: 'approach:image callout removed', path: '/approach/', pass: true });
 
     const pathways = [
       ['Individual', '/individual/'],

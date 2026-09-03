@@ -82,3 +82,11 @@
 - [x] Web-optimize the restored image to 1200×1600 and approximately 404 KB for clarity without unnecessary page weight.
 - [x] Confirm the portrait remains prominent, clear, and safely cropped on desktop and mobile.
 - [ ] Publish the portrait correction after the completed side-by-side fidelity review.
+
+## Approach image callout removal
+
+- [ ] Remove the dedicated Approach page’s image-overlay callout box and its `APPROACH` label.
+- [ ] Preserve the tree-rings image, main Approach copy, page structure, and one-click About link.
+- [ ] Confirm the image remains cleanly framed on desktop and mobile after box removal.
+- [ ] Re-run About and Approach route/link QA before any publication.
+- [ ] Publish the approved box removal only after permanent-site verification.

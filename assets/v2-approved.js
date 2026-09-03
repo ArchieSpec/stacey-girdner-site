@@ -26,6 +26,7 @@
     return ({
       '/': 'home',
       '/about': 'about',
+      '/approach': 'approach',
       '/individual': 'individual',
       '/couples': 'couples',
       '/executives': 'professional',
@@ -196,6 +197,10 @@
     document.querySelector('#psychodynamic-approach')?.remove();
   };
 
+  const updateApproach = () => {
+    document.querySelector('.editorial-media .image-note')?.remove();
+  };
+
   const updateIndividual = () => {
     const image = document.querySelector('.editorial-media > img');
     if (image) {
@@ -272,6 +277,7 @@
     const route = routeKey();
     if (route === 'home') updateHome();
     if (route === 'about') updateAbout();
+    if (route === 'approach') updateApproach();
     if (route === 'individual') updateIndividual();
     if (route === 'couples') updateCouples();
     if (route === 'faq') updateFaq();
