@@ -14,6 +14,18 @@ const items = [
   ['Consultation', '/contact/'],
 ];
 
+const photoCredits = [
+  ['/', 'Jan Tinneberg', 'https://unsplash.com/@craft_ear'],
+  ['/life-transitions/', 'Chris Lawton', 'https://unsplash.com/@chrislawton'],
+  ['/faq/', 'Jukan Tateisi', 'https://unsplash.com/@tateisimikito'],
+  ['/contact/', 'Ambrose Chua', 'https://unsplash.com/@serverwentdown'],
+  ['/policies/', 'Javier Allegue Barros', 'https://unsplash.com/@soymeraki'],
+  ['/individual/', 'Jeremy Bishop', 'https://unsplash.com/@jeremybishop'],
+  ['/couples/', 'Gregoire Jeanneau', 'https://unsplash.com/@gregjeanneau'],
+  ['/executives/', 'Nicholas Sampson', 'https://unsplash.com/@nicholassampson'],
+  ['/approach/', 'Simon Gibson', 'https://unsplash.com/@onedharma'],
+];
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function waitForDebugger(port) {
@@ -196,13 +208,13 @@ async function runViewport(name, width, height, port) {
     if (
       !aboutState.buttonHref.endsWith('/approach/') ||
       aboutState.hasDuplicateSection ||
-      !aboutState.portraitSrc.endsWith('/images/stacey-portrait-clear.jpg') ||
-      aboutState.portraitWidth < 1200 ||
-      aboutState.portraitHeight < 1600
+      !aboutState.portraitSrc.endsWith('/images/stacey-portrait-2023.jpg') ||
+      aboutState.portraitWidth !== 798 ||
+      aboutState.portraitHeight !== 1200
     ) {
       throw new Error(`${name} About one-click flow or portrait clarity check failed: ${JSON.stringify(aboutState)}`);
     }
-    results.push({ viewport: name, interaction: 'about:duplicate section removed and clear portrait loaded', path: '/about/', pass: true });
+    results.push({ viewport: name, interaction: 'about:duplicate section removed and native portrait loaded', path: '/about/', pass: true });
 
     await clickByText(client, 'a', 'Learn about my approach');
     await waitForPage(
@@ -213,9 +225,16 @@ async function runViewport(name, width, height, port) {
     await assertPage(client, '/approach/', `${name} About to Approach direct link`);
     const approachState = await client.evaluate(`(() => ({
       hasImageNote: Boolean(document.querySelector('.editorial-media .image-note')),
+      imageSrc: document.querySelector('.editorial-media > img')?.getAttribute('src') || '',
+      imageAlt: document.querySelector('.editorial-media > img')?.getAttribute('alt') || '',
       mainText: (document.querySelector('main')?.innerText || '').trim(),
     }))()`);
-    if (approachState.hasImageNote || !approachState.mainText.includes('Why do I keep doing this')) {
+    if (
+      approachState.hasImageNote ||
+      !approachState.imageSrc.endsWith('/images/approach-leaf-simon-gibson.webp') ||
+      !approachState.imageAlt.includes('brown maple leaf') ||
+      !approachState.mainText.includes('Why do I keep doing this')
+    ) {
       throw new Error(`${name} Approach image callout or page content check failed: ${JSON.stringify(approachState)}`);
     }
     results.push({ viewport: name, interaction: 'about:Learn about my approach', path: '/approach/', pass: true });
@@ -237,6 +256,35 @@ async function runViewport(name, width, height, port) {
       );
       await assertPage(client, path, `${name} Ways to Begin ${label}`);
       results.push({ viewport: name, interaction: `pathway:${label}`, path, pass: true });
+    }
+
+    for (const [path, photographer, href] of photoCredits) {
+      await navigate(client, `${BASE_URL}${path}`);
+      const creditState = await client.evaluate(`(() => {
+        const media = document.querySelector(${JSON.stringify(path === '/' ? '.home-media' : '.editorial-media')});
+        const image = media?.querySelector(':scope > img');
+        const credit = media?.querySelector(':scope > .photo-credit');
+        const link = credit?.querySelector('a');
+        const imageRect = image?.getBoundingClientRect();
+        const creditRect = credit?.getBoundingClientRect();
+        return {
+          count: document.querySelectorAll('.photo-credit').length,
+          text: link?.textContent.trim() || '',
+          href: link?.href || '',
+          fontSize: credit ? Number.parseFloat(getComputedStyle(credit).fontSize) : 0,
+          isBelowImage: Boolean(imageRect && creditRect && creditRect.top >= imageRect.bottom),
+        };
+      })()`);
+      if (
+        creditState.count !== 1 ||
+        creditState.text !== `Photo by ${photographer}` ||
+        creditState.href !== href ||
+        creditState.fontSize < 11 ||
+        !creditState.isBelowImage
+      ) {
+        throw new Error(`${name} ${photographer} photo credit failed: ${JSON.stringify(creditState)}`);
+      }
+      results.push({ viewport: name, interaction: `credit:${photographer}`, path, pass: true });
     }
 
     await navigate(client, `${BASE_URL}/faq/`);
@@ -268,12 +316,22 @@ async function runViewport(name, width, height, port) {
     const formState = await client.evaluate(`(() => ({
       form: Boolean(document.querySelector('.contact-form')),
       button: document.querySelector('.contact-form button')?.textContent.trim(),
-      inputs: document.querySelectorAll('.contact-form input, .contact-form textarea').length,
+      inputs: document.querySelectorAll('.contact-form input').length,
+      textareas: document.querySelectorAll('.contact-form textarea').length,
+      selects: [...document.querySelectorAll('.contact-form select')].map((el) => el.name),
+      hasPrivacyNote: Boolean(document.querySelector('.contact-form small')),
     }))()`);
-    if (!formState.form || formState.button !== 'Schedule a Consultation' || formState.inputs !== 4) {
-      throw new Error(`${name} contact form structure or CTA label failed`);
+    if (
+      !formState.form ||
+      formState.button !== 'Schedule a Consultation' ||
+      formState.inputs !== 4 ||
+      formState.textareas !== 0 ||
+      formState.selects.join(',') !== 'contact_method,contact_time' ||
+      formState.hasPrivacyNote
+    ) {
+      throw new Error(`${name} privacy-focused contact form structure or CTA label failed: ${JSON.stringify(formState)}`);
     }
-    results.push({ viewport: name, interaction: 'contact:form present, not submitted', path: '/contact/', pass: true });
+    results.push({ viewport: name, interaction: 'contact:privacy-focused form present, not submitted', path: '/contact/', pass: true });
 
     client.close();
     return results;
@@ -286,7 +344,8 @@ async function runViewport(name, width, height, port) {
 
 const results = [
   ...(await runViewport('mobile-390', 390, 844, 9225)),
-  ...(await runViewport('desktop-1440', 1440, 1000, 9226)),
+  ...(await runViewport('tablet-768', 768, 1024, 9226)),
+  ...(await runViewport('desktop-1440', 1440, 1000, 9227)),
 ];
 
 console.log(JSON.stringify({ passed: results.length, failed: 0, results }, null, 2));

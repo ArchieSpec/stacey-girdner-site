@@ -6,6 +6,9 @@
 (() => {
   const base = '/stacey-girdner-site';
   const contactPath = `${base}/contact/`;
+  const web3FormsEndpoint = 'https://api.web3forms.com/submit';
+  // Stacey will provide the site-specific Web3Forms access key before live activation.
+  const web3FormsAccessKey = '';
 
   const navigation = [
     ['Home', `${base}/`, 'home'],
@@ -33,7 +36,40 @@
       '/life-transitions': 'transitions',
       '/faq': 'faq',
       '/contact': 'contact',
+      '/policies': 'policies',
     })[path] || '';
+  };
+
+  const photoCredits = {
+    home: ['Jan Tinneberg', 'https://unsplash.com/@craft_ear'],
+    transitions: ['Chris Lawton', 'https://unsplash.com/@chrislawton'],
+    faq: ['Jukan Tateisi', 'https://unsplash.com/@tateisimikito'],
+    contact: ['Ambrose Chua', 'https://unsplash.com/@serverwentdown'],
+    policies: ['Javier Allegue Barros', 'https://unsplash.com/@soymeraki'],
+    individual: ['Jeremy Bishop', 'https://unsplash.com/@jeremybishop'],
+    couples: ['Gregoire Jeanneau', 'https://unsplash.com/@gregjeanneau'],
+    professional: ['Nicholas Sampson', 'https://unsplash.com/@nicholassampson'],
+    approach: ['Simon Gibson', 'https://unsplash.com/@onedharma'],
+  };
+
+  const addPhotoCredit = (route) => {
+    const credit = photoCredits[route];
+    if (!credit) return;
+
+    const media = document.querySelector(route === 'home' ? '.home-media' : '.editorial-media');
+    const image = media?.querySelector(':scope > img');
+    if (!media || !image || media.querySelector(':scope > .photo-credit')) return;
+
+    const caption = document.createElement('p');
+    caption.className = 'photo-credit';
+    const link = document.createElement('a');
+    link.href = credit[1];
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = `Photo by ${credit[0]}`;
+    link.setAttribute('aria-label', `Photo by ${credit[0]} on Unsplash`);
+    caption.append(link);
+    image.insertAdjacentElement('afterend', caption);
   };
 
   const makeLink = ([label, href, key], current) => {
@@ -179,7 +215,7 @@
 
     const portrait = page.querySelector('.editorial-media > img');
     if (portrait) {
-      portrait.src = `${base}/images/stacey-portrait-clear.jpg`;
+      portrait.src = `${base}/images/stacey-portrait-2023.jpg`;
       portrait.alt = 'Dr. Stacey Girdner';
     }
 
@@ -198,6 +234,11 @@
   };
 
   const updateApproach = () => {
+    const image = document.querySelector('.editorial-media > img');
+    if (image) {
+      image.src = `${base}/images/approach-leaf-simon-gibson.webp`;
+      image.alt = 'A brown maple leaf caught on a dark metal fence';
+    }
     document.querySelector('.editorial-media .image-note')?.remove();
   };
 
@@ -266,8 +307,117 @@
       image.alt = 'A warm orange curved stairwell';
     }
 
-    const submit = document.querySelector('.contact-form button[type="submit"]');
-    if (submit) submit.textContent = 'Schedule a Consultation';
+    const form = document.querySelector('.contact-form');
+    if (!form || form.dataset.v2Form === 'true') return;
+    form.dataset.v2Form = 'true';
+
+    const messageField = form.querySelector('textarea[name="message"]')?.closest('label');
+    messageField?.remove();
+
+    const makeSelectField = (labelText, name, options) => {
+      const label = document.createElement('label');
+      label.className = 'contact-form-choice';
+      const text = document.createElement('span');
+      text.textContent = labelText;
+      const select = document.createElement('select');
+      select.name = name;
+      select.required = true;
+      const prompt = document.createElement('option');
+      prompt.value = '';
+      prompt.textContent = 'Please choose';
+      prompt.disabled = true;
+      prompt.selected = true;
+      select.append(prompt);
+      options.forEach(([value, textValue]) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = textValue;
+        select.append(option);
+      });
+      label.append(text, select);
+      return label;
+    };
+
+    const submit = form.querySelector('button[type="submit"]');
+    if (!submit) return;
+    submit.textContent = 'Schedule a Consultation';
+
+    const choiceFields = document.createDocumentFragment();
+    choiceFields.append(
+      makeSelectField('How should Stacey reach you?', 'contact_method', [
+        ['email', 'Email'],
+        ['phone', 'Phone'],
+        ['either', 'Either email or phone'],
+      ]),
+      makeSelectField('When is a good time to reach you?', 'contact_time', [
+        ['morning', 'Morning'],
+        ['afternoon', 'Afternoon'],
+        ['evening', 'Evening'],
+      ])
+    );
+    form.insertBefore(choiceFields, submit);
+
+    const honeypot = document.createElement('input');
+    honeypot.type = 'checkbox';
+    honeypot.name = 'botcheck';
+    honeypot.tabIndex = -1;
+    honeypot.autocomplete = 'off';
+    honeypot.setAttribute('aria-hidden', 'true');
+    honeypot.className = 'contact-form-honeypot';
+    form.append(honeypot);
+
+    const status = document.createElement('p');
+    status.className = 'contact-form-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    form.insertBefore(status, submit);
+
+    const privacyNote = form.querySelector('small');
+    privacyNote?.remove();
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (honeypot.checked) {
+        form.reset();
+        status.textContent = 'Thank you. Stacey will be in touch.';
+        return;
+      }
+
+      if (!web3FormsAccessKey) {
+        status.textContent = 'The contact form is being prepared. Please call or email Stacey directly for now.';
+        return;
+      }
+
+      const formData = new FormData(form);
+      formData.set('access_key', web3FormsAccessKey);
+      formData.set('subject', 'New consultation request from staceygirdner.com');
+      formData.set('from_name', 'Stacey Girdner Website');
+      formData.set('replyto', String(formData.get('email') || ''));
+      formData.delete('message');
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      status.textContent = 'Sending your request…';
+
+      try {
+        const response = await fetch(web3FormsEndpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === false) throw new Error('Relay rejected the submission');
+        form.reset();
+        status.textContent = 'Thank you. Stacey will be in touch using your preferred method and time.';
+      } catch (error) {
+        console.error('[Contact form]', error);
+        status.textContent = 'We could not send the form right now. Please email stacey@staceygirdner.com directly.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Schedule a Consultation';
+      }
+    });
   };
 
   const applyPage = () => {
@@ -282,7 +432,8 @@
     if (route === 'couples') updateCouples();
     if (route === 'faq') updateFaq();
     if (route === 'contact') updateContact();
-    if (window.location.pathname.replace(/\/+$/, '').endsWith('/policies')) updatePolicies();
+    if (route === 'policies') updatePolicies();
+    addPhotoCredit(route);
 
     main.dataset.v2Applied = 'true';
   };

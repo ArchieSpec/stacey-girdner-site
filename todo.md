@@ -85,8 +85,117 @@
 
 ## Approach image callout removal
 
-- [ ] Remove the dedicated Approach page’s image-overlay callout box and its `APPROACH` label.
-- [ ] Preserve the tree-rings image, main Approach copy, page structure, and one-click About link.
-- [ ] Confirm the image remains cleanly framed on desktop and mobile after box removal.
-- [ ] Re-run About and Approach route/link QA before any publication.
+- [x] Remove the dedicated Approach page’s image-overlay callout box and its `APPROACH` label.
+- [x] Preserve the approved main Approach copy, page structure, and one-click About link while later image replacements are applied separately.
+- [x] Confirm the image remains cleanly framed on desktop and mobile after box removal.
+- [x] Re-run About and Approach route/link QA before any publication.
 - [ ] Publish the approved box removal only after permanent-site verification.
+
+## Pending readability note
+
+- [x] Raise the FAQ minimum readable text size to 11 px and scale the question, answer, and supporting-text hierarchy upward for senior visitors.
+- [x] Hold implementation until the user finishes the complete note set.
+- [x] Validate FAQ readability and wrapping on desktop, tablet, and mobile before publication.
+
+
+## Image attribution audit
+
+- [x] Inventory every current Stacey page image and its local asset filename.
+- [x] Search Unsplash for exact or defensible matches and identify each photographer only when verifiable.
+- [x] Record original source URLs, photographer names, confidence, and license/attribution notes.
+- [x] Separate confirmed matches from unresolved or user-supplied/generated assets; never guess credits.
+- [x] Present the attribution register for approval before adding linked `Photo by Photographer Name` credits to the site.
+
+## Direct-submit contact form
+
+- [ ] Replace the current `mailto:` contact-form behavior with a direct email relay to `stacey@staceygirdner.com`.
+- [x] Add submit, success, error, and loading states without changing the approved V11.5/V2 visual design.
+- [ ] Verify the form flow on desktop and mobile; use a real relay key only after Stacey provides or approves the access key.
+- [x] Remove the open-ended message/chat field so visitors are not invited to submit private or clinical details.
+- [x] Retain only contact information plus preferred contact method (How) and preferred contact timing (When).
+- [x] Update privacy guidance and relay payload to reflect contact coordination only.
+- [x] Set the FAQ minimum text size to 11px and scale the related question, answer, and supporting text hierarchy for senior readability.
+- [x] Verify the FAQ typography at desktop, tablet, and mobile widths without changing the approved content or layout.
+- [x] Remove the sentence `Please share contact details only. Do not include confidential, urgent, or crisis information.` from beneath the submit button.
+- [x] Confirm the sentence is absent and form spacing remains balanced on mobile, tablet, and desktop.
+
+## Stacey portrait replacement
+
+- [x] Replace the current About-page portrait with the exact uploaded `StaceyGirdner2023WEB-1.jpg` file.
+- [x] Preserve the uploaded image at its native 798×1200 dimensions without AI restoration, enlargement, or unauthorized cropping.
+- [x] Verify the portrait dimensions, full composition, and About-page layout on desktop, tablet, and mobile.
+- [x] Shorten the displayed portrait on desktop so the About page fits within one screen without scrolling.
+- [x] Preserve the full portrait and native aspect ratio while reducing its displayed dimensions.
+- [x] Keep the portrait comfortably readable on tablet and mobile instead of forcing the desktop height limit at every breakpoint.
+
+## FAQ computed-size correction
+
+- [x] Correct the first FAQ consultation answer so its actual computed size is never below 11px.
+- [x] Verify the exact sentence beginning `The free consultation is a brief, 15-minute conversation` at mobile, tablet, and desktop widths.
+- [x] Confirm no later compiled or responsive CSS rule reduces FAQ answers to 9px.
+
+## Sitewide 11px minimum typography
+
+- [x] Audit computed visitor-facing font sizes on every public route at mobile, tablet, and desktop widths.
+- [x] Enforce an absolute 11px minimum for all visitor-facing text, including labels, navigation, buttons, notes, footer text, and form guidance.
+- [x] Scale body copy, navigation, questions, headings, and display titles proportionally above the 11px floor to preserve the approved hierarchy.
+- [x] Recheck wrapping, navigation fit, button fit, and one-page desktop layouts after the typography increase.
+
+## Senior-friendly readability hierarchy
+
+- [x] Increase body copy and FAQ answers to 17–18px for comfortable senior reading.
+- [x] Increase form controls and buttons to 16px, navigation and labels to 14px, and credits and footer text to at least 13px.
+- [x] Preserve a proportional distinction between body text, supporting text, questions, headings, and display titles.
+- [x] Correct any new wrapping, navigation-fit, button-fit, image-credit, or one-screen layout issues caused by the larger text.
+- [x] Audit computed typography and responsive layout on every public route at mobile, tablet, and desktop widths.
+
+## Sitewide contrast audit
+
+- [x] Audit every visible text element’s computed foreground and effective background contrast on all public routes at mobile, tablet, and desktop widths.
+- [x] Require at least 4.5:1 contrast for normal text and 3:1 for qualifying large text under WCAG AA.
+- [x] Check navigation, buttons, form controls, links, photo credits, footer copy, image notes, and focus states separately.
+- [x] Confirm no palette correction is required because all measured text pairs pass WCAG AA.
+- [x] Rerun senior typography, photo-credit, route, and responsive regressions after the contrast audit.
+
+## Reusable workflow skill
+
+- [x] Create a reusable client-website fidelity and launch skill using the official skill-creation workflow.
+- [x] Capture approved-design preservation, change-control, privacy-conscious forms, image attribution, senior-readable typography, contrast, responsive QA, and publication gates.
+- [x] Bundle reusable audit scripts and launch checklists without including Stacey-specific personal or project data.
+- [x] Validate the skill package and deliver it as an installable skill card.
+
+## Final GitHub publication and WordPress migration
+
+- [ ] Recheck the complete working tree, final QA artifacts, branch, remote, and last published revision before committing.
+- [ ] Preserve a rollback reference to the current permanent GitHub Pages revision.
+- [ ] Resolve or explicitly gate the missing Web3Forms access key before publishing a final version that claims direct email delivery.
+- [ ] Commit and push the exact approved revision to the Stacey GitHub repository.
+- [ ] Verify all routes, images, credits, typography, contrast, and contact behavior on the permanent GitHub Pages URL.
+- [ ] Inspect the authenticated WordPress environment and choose a migration method that preserves the approved static design.
+- [ ] Migrate the site into WordPress without redesigning it or disabling the GitHub rollback source.
+- [ ] Verify the WordPress version on mobile, tablet, and desktop before changing any production domain routing.
+- [ ] Deliver the GitHub revision, WordPress URL, rollback notes, form dependency, and independent operating instructions.
+
+## Approach image replacement
+
+- [x] Replace the tree-stump image on the Approach page with the exact uploaded `rowan-freeman-_J8IRsA4hG0-unsplash.webp` photograph.
+- [x] Preserve the approved Approach page layout and choose a responsive crop that keeps the archway and path legible.
+- [x] Update the image alt text to describe the archway opening onto a landscape.
+- [x] Re-run the 11px computed-font audit and route suite after the image replacement.
+- [x] Replace the Approach image again with the exact Unsplash source photo `UePlohjDqNY` supplied by the user.
+- [x] Verify the photographer displayed on the `UePlohjDqNY` source page and add a linked `Photo by …` credit beneath the image.
+- [x] Preserve the approved Approach layout while selecting a responsive focal position for the new image.
+- [x] Re-run source, credit-link, route, and senior-readable font-floor checks on mobile, tablet, and desktop.
+
+## Photographer credits
+
+- [x] Verify an Unsplash profile or exact source link for Jan Tinneberg, Chris Lawton, Jukan Tateisi, Ambrose Chua, Javier Allegue Barros, Jeremy Bishop, Gregoire Jeanneau, and Nicholas Sampson.
+- [x] Add `Photo by Jan Tinneberg` beneath the Home door-opening image.
+- [x] Add `Photo by Chris Lawton` beneath the Transitions string-of-leaves image.
+- [x] Add `Photo by Jukan Tateisi` beneath the FAQ stairs-with-Lenore image.
+- [x] Add `Photo by Ambrose Chua` beneath the Contact orange-stairs image.
+- [x] Add `Photo by Javier Allegue Barros` beneath the Fees and Policies street-sign image.
+- [x] Add `Photo by Jeremy Bishop` beneath the Individual trees-with-light image.
+- [x] Add `Photo by Gregoire Jeanneau` beneath the Couples double-stairs image.
+- [x] Add `Photo by Nicholas Sampson` beneath the Professional person-on-mountain image.
+- [x] Keep every credit at or above the 11px sitewide minimum and verify all links and layouts on mobile, tablet, and desktop.

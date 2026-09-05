@@ -70,6 +70,23 @@ main h1 {
   line-height: 1.58;
 }
 
+/* Senior-friendly FAQ floor: no FAQ text should render below 11px. */
+.faq-list,
+.faq-list summary,
+.faq-list details p,
+.faq-list + * {
+  font-size: 11px;
+}
+
+.faq-list summary {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.faq-list details p {
+  font-size: 12px;
+}
+
 .mini-card-row p {
   font-size: 11px;
   line-height: 1.55;
@@ -141,6 +158,7 @@ a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
 input:focus-visible,
+select:focus-visible,
 textarea:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--v2-focus) 72%, white);
   outline-offset: 3px;
@@ -182,6 +200,83 @@ img[src$='faq-approved-staircase.jpg'] {
 
 img[src$='consultation-orange-stairwell.jpg'] {
   object-position: center 48%;
+}
+
+img[src$='approach-leaf-simon-gibson.webp'] {
+  object-position: 50% 38%;
+}
+
+/* Use Stacey's approved 798×1200 portrait at its native composition. */
+.editorial-page .editorial-media > img[src$='stacey-portrait-2023.jpg'] {
+  display: block;
+  width: 100%;
+  max-width: 798px;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.contact-form-choice {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-form-choice span {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.contact-form-choice select {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 12px;
+  border: 1px solid rgba(35, 50, 57, 0.35);
+  border-radius: 0;
+  background: #fff;
+  color: #233239;
+  font: inherit;
+}
+
+.contact-form-status {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  color: #233239;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.contact-form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo-credit {
+  position: relative;
+  z-index: 3;
+  margin: 8px 4px 0;
+  color: #4f5b5a;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.photo-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.photo-credit a:focus-visible {
+  border-radius: 2px;
 }
 
 @media (max-width: 980px) {
@@ -230,7 +325,8 @@ img[src$='consultation-orange-stairwell.jpg'] {
   }
 
   .contact-form input,
-  .contact-form textarea {
+  .contact-form textarea,
+  .contact-form select {
     font-size: 16px;
   }
 
@@ -247,5 +343,124 @@ img[src$='consultation-orange-stairwell.jpg'] {
 @media (max-width: 390px) {
   .home-cta .btn {
     font-size: 9.5px;
+  }
+}
+
+/*
+ * Senior-friendly readability hierarchy.
+ * Body and FAQ copy carry the largest reading burden; navigation, controls,
+ * captions, and footer text remain compact but comfortably legible.
+ */
+body {
+  font-size: 17px;
+}
+
+main p,
+main li {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.home-copy > p:not(.eyebrow),
+.editorial-copy > p:not(.eyebrow),
+.faq-list details p {
+  font-size: 18px;
+  line-height: 1.68;
+}
+
+.faq-list summary,
+.point strong,
+.mini-card-row strong {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.pathway-card p,
+.point p,
+.mini-card-row p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.recognition-card p,
+.callout p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pathway-card > span {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.desktop-nav a,
+.mobile-nav a,
+.header-cta,
+.mobile-cta {
+  font-size: 14px;
+}
+
+.btn,
+.contact-form label,
+.contact-form input,
+.contact-form textarea,
+.contact-form select,
+.contact-form-choice span,
+.contact-form-status {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.brand-sub,
+.eyebrow,
+.editorial-copy > .eyebrow,
+.home-copy > .eyebrow,
+.pathway-section > .eyebrow,
+.contact-address-card .eyebrow,
+.practice-tag,
+.point-num {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.photo-credit,
+.site-footer .footer-inner > span:first-child,
+.footer-links a,
+.footer-links span,
+.contact-address-card p,
+.image-note p,
+main small {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1080px) and (min-width: 721px) {
+  .desktop-nav a,
+  .header-cta {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 720px) {
+  .home-copy > p:not(.eyebrow),
+  .editorial-copy > p:not(.eyebrow),
+  .faq-list details p {
+    font-size: 17px;
+  }
+
+  .photo-credit,
+  .site-footer .footer-inner > span:first-child,
+  .footer-links a,
+  .footer-links span {
+    font-size: 13px;
+  }
+}
+
+/* Shorten the desktop portrait while retaining the complete 798×1200 image. */
+@media (min-width: 821px) {
+  .editorial-page .editorial-media > img[src$='stacey-portrait-2023.jpg'] {
+    width: auto;
+    max-width: 100%;
+    max-height: min(62vh, 520px);
   }
 }
